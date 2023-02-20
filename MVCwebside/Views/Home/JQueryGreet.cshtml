@@ -1,5 +1,48 @@
-﻿@*
+﻿
+<button class="btn btn-primary" id="getAsync">非同步Get</button>
+<button class="btn btn-primary" id="postAsync">非同步Post</button>
+<img src="~/images/basketball.gif" style="width:30px;height:30px;display:none;" id="basketball" />
+<div id="result">
+</div>
+
+@*
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
-@{
+@section Scripts{
+    <script>
+        $("#getAsync").on("click", function () {
+            //alert("確認觸發");
+            var p =encodeURI("Name=郭小明");
+            $("#basketball").show();
+            $.ajax({
+                type:"Get",
+                url: "https://localhost:7124/Ajax/Greet?"+p
+            }).done(function(data){
+                $("#basketball").hide();
+                $("#result").text(data);
+            }).fail(function(err){
+                $("#basketball").hide();
+                alert(err.statusText);
+            });
+
+        });
+        $("#postAsync").on("click", function () {
+            //alert("確認觸發");
+            
+            $("#basketball").show();
+            $.ajax({
+                type: "Post",
+                data:{
+                    Name:"柯小明"
+                },
+                url: "https://localhost:7124/Ajax/Greet" 
+            }).done(function (data) {
+                $("#basketball").hide();
+                $("#result").text(data);
+            }).fail(function (err) {
+                $("#basketball").hide();
+                alert(err.statusText);
+            });
+        });
+    </script>
 }

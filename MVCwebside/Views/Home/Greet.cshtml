@@ -1,5 +1,63 @@
-﻿@*
+﻿
+<button class="btn btn-primary" id="getAsync">非同步Get</button>
+<button class="btn btn-primary" id="postAsync">非同步Post</button>
+<img src="~/images/basketball.gif" style="width:30px;height:30px;display:none;" id="basketball" />
+<div id="result">
+
+</div>
+
+@*
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
-@{
+@section Scripts{
+    <script>
+        $("#getAsync").on("click", function () {
+            //alert("確認觸發");
+            var xmlHttp=new XMLHttpRequest();
+            if(xmlHttp !=null){
+                var p = encodeURI("Name=李小明");
+                xmlHttp.open("GET", "https://localhost:7124/Ajax/Greet?"+p,true);
+
+                xmlHttp.onreadystatechange=function(){
+                    if(xmlHttp.readyState==4){
+                        if(xmlHttp.status==200){
+                            document.getElementById("result").textContent=decodeURI(xmlHttp.responseText);
+                            document.getElementById("basketball").style.display="none";
+                        }
+                    }
+                }
+
+                document.getElementById("basketball").style.display="inline";
+                xmlHttp.send();
+            }
+            else{
+                alert("麻煩更換瀏覽器或更新瀏覽器")
+            }
+
+        });
+        $("#postAsync").on("click", function () {
+            //alert("確認觸發");
+            var xmlHttp = new XMLHttpRequest();
+            if (xmlHttp != null) {
+                var p = "Name=張小明";
+                xmlHttp.open("Post", "https://localhost:7124/Ajax/Greet" , true);
+
+                xmlHttp.onreadystatechange = function () {
+                    if (xmlHttp.readyState == 4) {
+                        if (xmlHttp.status == 200) {
+                            document.getElementById("result").textContent = decodeURI(xmlHttp.responseText);
+                            document.getElementById("basketball").style.display = "none";
+                        }
+                    }
+                }
+
+                xmlHttp.setRequestHeader("content-type","application/x-www-form-urlencoded");
+                document.getElementById("basketball").style.display = "inline";
+                xmlHttp.send(p);
+            }
+            else {
+                alert("麻煩更換瀏覽器或更新瀏覽器")
+            }
+        });
+    </script>
 }

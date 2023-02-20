@@ -13,12 +13,14 @@ namespace MVCwebside.Controllers
         }
         [HttpGet()]
         public string Greet(string Name) 
-        { 
+        {
+            Thread.Sleep(3000);
             return $"Hello,{Name}!"; 
         }
         [HttpPost(), ActionName("Greet")]
         public string PostGreet(string Name)
         {
+            Thread.Sleep(3000);
             return $"Hello,{Name}!";
         }
         [HttpPost()]

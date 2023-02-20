@@ -1,0 +1,19 @@
+h1,h2,h3 {
+    text-align: center;
+	font-size: 60px;
+	margin: 0;
+	padding-top: 10px;
+	color: hwb(0 6% 35%);
+	text-transform: capitalize; 
+	text-shadow: 2px 2px 5px rgb(7, 2, 2);
+}
+
+#container {
+	text-align: center;
+
+}
+
+body {
+    background: url("https://media.tenor.com/hE0T8D0GpXsAAAAC/joinblink-blink.gif") repeat; 
+
+}
