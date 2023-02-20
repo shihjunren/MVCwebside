@@ -12,7 +12,30 @@ namespace MVCwebside.Controllers
         {
             _logger = logger;
         }
-
+        public IActionResult Greet()
+        {
+            return View();
+        }
+        public IActionResult JQueryGreet()
+        {
+            return View();
+        }
+        public IActionResult FetchGreet()
+        {
+            return View();
+        }
+        public IActionResult CheckName()
+        {
+            return View();
+        }
+        public IActionResult JQueryCheckName()
+        {
+            return View();
+        }
+        public IActionResult FetchCheckName()
+        {
+            return View();
+        }
         public IActionResult Index()
         {
             return View();
