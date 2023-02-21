@@ -26,6 +26,7 @@ namespace MVCwebside.Controllers
         [HttpPost()]
         public string FetchPostGreet([FromBody] Parameter p) 
         {
+            Thread.Sleep(3000);
             return $"Hello,{p.Name}!";
         }
 

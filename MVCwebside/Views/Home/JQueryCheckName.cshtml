@@ -1,5 +1,35 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
+﻿<div class="container" style="width:50%">
+    <div class="form-group">
+        <label class="form-label">檢查名稱 :</label>
+        <input type="text" class="form-control" id="firstName" onkeyup="keyup()" />
+        <span id="result" class="text-danger"></span>
+        <img src="~/images/basketball.gif" style="width:30px;height:30px;display:none;" id="basketball" />
+
+    </div>
+</div>
+@section Scripts
+    {
+    <script>
+        function keyup() {
+            $("#basketball").show();
+            $.ajax({
+                type:"POST",
+                data:{
+                    FirstName: $("#firstName").val()
+                },
+                url:"https://localhost:7124/Ajax/CheckName",
+            }).done(function(data){
+                if(data =="true"){
+                    $("#result").text("查有此員工");
+                }else{
+                    $("#result").text("查無此員工");
+                                        
+                }
+                $("#basketball").hide();
+            }).fail(function(err){
+                $("#basketball").hide();
+                aler(err);
+            });
+        }
+    </script>
 }

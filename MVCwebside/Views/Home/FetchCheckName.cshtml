@@ -1,5 +1,46 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
+﻿<div class="container" style="width:50%">
+    <div class="form-group">
+        <label class="form-label">檢查名稱 :</label>
+        <input type="text" class="form-control" id="firstName" onkeyup="keyup()" />
+        <span id="result" class="text-danger" ></span>
+        <img src="~/images/basketball.gif" style="width:30px;height:30px;display:none;" id="basketball" />
+
+    </div>
+</div>
+@section Scripts
+    {
+    <script>
+        function keyup() {
+            $("#basketball").show();
+            var p={
+               FirstName:$("#firstName").val()
+            };
+            fetch("https://localhost:7124/Ajax/FetchCheckName", {
+                method:"post",
+                body:JSON.stringify(p),
+                headers:{
+                    "Content-Type":"application/json"
+                },
+
+            }).then(function(result){
+                $("#basketball").hide();
+                if(result.ok){
+                    return result.text();
+                }
+            
+            }).then(function(data){
+                if(data=="true"){
+                     $("#result").text("查有此員工")
+                }
+                else{
+                     $("#result").text("查無此員工")
+                }
+               
+            
+            }).catch(function(err){
+                $("#basketball").hide();
+                alert(err)
+            })
+        }
+    </script>
 }

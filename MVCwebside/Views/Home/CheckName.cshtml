@@ -1,5 +1,43 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
+﻿<div class="container" style="width:50%">
+    <div class="form-group">
+        <label class="form-label">檢查名稱 :</label>
+        <input type="text" class="form-control" id="firstName" onkeyup="keyup()" />
+        <span id="result" ></span>
+        <img src="~/images/basketball.gif" style="width:30px;height:30px;display:none;" id="basketball" />
+
+    </div>
+</div>
+@section Scripts
+{
+    <script>
+        function keyup() {
+            var xmlHttp = new XMLHttpRequest();
+            if(xmlHttp !=null){
+                var p = "FirstName="+ document.getElementById("firstName").value;
+                xmlHttp.open("post", "https://localhost:7124/Ajax/CheckName",true);
+                xmlHttp.onreadystatechange=function(){
+                    if(xmlHttp.readyState==4){
+                        if(xmlHttp.status==200){
+                            if(xmlHttp.responseText=="true"){   
+                                document.getElementById("result").style.color="green";
+                                document.getElementById("result").textContent="查詢到此員工";
+                                
+                            }
+                            else{
+                                document.getElementById("result").style.color="red";
+                                document.getElementById("result").textContent="查無此員工";
+                            }
+                        }
+                        document.getElementById("basketball").style.display="none";
+                    }
+                };
+                document.getElementById("basketball").style.display="inline";
+                xmlHttp.setRequestHeader("content-type","application/x-www-form-urlencoded");
+                xmlHttp.send(p);
+            }
+            else{
+                alert("請升級瀏覽器或變更瀏覽器")
+            }
+        }
+    </script>
 }
